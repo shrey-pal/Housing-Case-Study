@@ -1,6 +1,7 @@
-Flask
-scikit-learn
-pandas
-numpy
-matplotlib
-gunicorn
+flask==2.2.2
+pandas==1.5.2
+numpy==1.23.5
+scikit-learn==1.2.0
+statsmodels==0.13.5
+gunicorn==20.1.0
+Werkzeug==2.2.2

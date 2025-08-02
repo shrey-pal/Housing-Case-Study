@@ -1,39 +1,41 @@
 # ==============================================================================
 # Dockerfile
 # ==============================================================================
-# Use a slim and recent Python version as the base image
+# Use a slim Python version for a smaller image size
 FROM python:3.9-slim-buster
 
 # Set the working directory inside the container
 
 WORKDIR /app
 
-# Copy the requirements file first to take advantage of Docker's layer caching
+# Set a default port. Render will override this with its own port.
 
-COPY requirement.txt requirement.txt
+ENV PORT 10000
 
-# Install the Python dependencies
+# Expose the port the app will run on
 
-RUN pip install --no-cache-dir -r requirement.txt
+EXPOSE 10000
 
-# Copy the rest of your application files into the container
+# Copy the requirements file first to leverage Docker's layer caching
 
-# This includes app.py, your .pkl files, and the 'templates' folder
+COPY requirements.txt requirements.txt
+
+# Install the dependencies
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your application files
 
 COPY . .
 
-# The PORT environment variable is automatically set by hosting services like Render.
-
-# This line makes the container listen on that port.
-
-EXPOSE $PORT
-
-# Command to run the application using Gunicorn, a production-ready web server.
-
-# It binds to all network interfaces on the port provided by the environment.
+# Command to run the application using Gunicorn
 
 CMD ["gunicorn", "--workers=4", "--bind", "0.0.0.0:$PORT", "app:app"]
 
 # \==============================================================================
 
+# requirements.txt
 
+# \==============================================================================
+
+# I've added specific versions to make your build more reliable.
