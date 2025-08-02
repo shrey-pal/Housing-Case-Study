@@ -1,0 +1,12 @@
+# Exported from Render on 2025-08-02T10:09:32Z
+services:
+- type: web
+  name: Housing-Case-Study
+  runtime: docker
+  repo: https://github.com/shrey-pal/Housing-Case-Study
+  plan: free
+  region: oregon
+  dockerContext: .
+  dockerfilePath: ./Dockerfile
+  autoDeployTrigger: commit
+version: "1"
