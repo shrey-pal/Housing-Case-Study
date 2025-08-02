@@ -18,11 +18,11 @@ EXPOSE 10000
 
 # Copy the requirements file first to leverage Docker's layer caching
 
-COPY requirements.txt requirements.txt
+COPY requirement.txt requirement.txt
 
 # Install the dependencies
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirement.txt
 
 # Copy the rest of your application files
 
